@@ -84,7 +84,20 @@
                         break;
 
                     case 5:
-                    
+                        try
+                        {
+                            Console.WriteLine("Sicuro di voler Terminare il Programma? (s/n)");
+                            string str = Console.ReadLine().ToLower();
+                            if (str == "s")
+                            {
+                                Environment.Exit(0);
+                                exitProgram = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
                         break;
                 }
                 
