@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace net_ef_videogame
             db.SaveChanges();
         }
 
-        public static void PrintElement()
+        public static void PrintElementSoftware()
         {
             using VideogameContext db = new VideogameContext();
             Console.WriteLine("Print data...");
@@ -32,6 +33,18 @@ namespace net_ef_videogame
             Console.WriteLine("Select Your SoftwareHouse: ");
 
         }
+        public static void PrintElementVideogames()
+        {
+            using VideogameContext db = new VideogameContext();
+            Console.WriteLine("Print VideoGames...");
+
+            List<VideoGame> videogame = db.VideoGame.OrderBy(videogame => videogame.Id).ToList<VideoGame>();
+
+            foreach (VideoGame videoGameItem in videogame) 
+            {
+                Console.WriteLine($"\t{videoGameItem.Id} \t {videoGameItem.Name}");
+            }
+        }
 
         public static void SearchIdGames(int idGame)
         {
@@ -44,6 +57,7 @@ namespace net_ef_videogame
             {
                 Console.WriteLine($"\t {videoGame.Id} \t {videoGame.Name}");
             }
+
         }
 
         public static void SearchGames(string nameGame)
@@ -57,6 +71,34 @@ namespace net_ef_videogame
             {
                 Console.WriteLine($"\t {videoGame.Id} \t {videoGame.Name}");
             }
+        }
+
+        public static void DeleteGames(int idNum)
+        {
+            using VideogameContext db = new VideogameContext();
+            //Console.WriteLine("Print VideoGames...");
+
+            //List<VideoGame> videogame = db.VideoGame.ToList<VideoGame>();
+
+            //foreach (VideoGame videoGame in videogame)
+            //{
+            //    Console.WriteLine($"\t {videoGame.Id} \t {videoGame.Name}");
+            //}
+
+            Console.WriteLine("Select id Games to Delete !!!PERMANENTLY!!!");
+
+            var game = db.VideoGame.Find(idNum);
+
+            if(game != null )
+            {
+                db.Remove(game);
+                Console.WriteLine($"E' stato rimosso: \t id: {game.Id} \t Nome: {game.Name}");
+            }
+            else
+            {
+                Console.WriteLine("Game Not Found!");
+            }
+            db.SaveChanges();
         }
     }
 }

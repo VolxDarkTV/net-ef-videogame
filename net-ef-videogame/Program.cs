@@ -32,7 +32,7 @@
                             string nameGame = Console.ReadLine();
                             Console.WriteLine("Description: ");
                             string descriptionGame = Console.ReadLine();
-                            VideogameManager.PrintElement();
+                            VideogameManager.PrintElementSoftware();
                             int idSoftwareHouse = Convert.ToInt32(Console.ReadLine());
                             VideogameManager.AddElement(nameGame, descriptionGame, idSoftwareHouse);
                         }
@@ -68,8 +68,19 @@
                         }
                         break;
 
-                    case 4: 
-
+                    case 4:
+                        try
+                        {
+                            VideogameManager.PrintElementVideogames();
+                            Console.WriteLine("Delete: ");
+                            int idNum = Convert.ToInt32(Console.ReadLine());
+                            VideogameManager.DeleteGames(idNum);
+                            VideogameManager.PrintElementVideogames();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
 
                     case 5:
