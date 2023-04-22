@@ -22,7 +22,7 @@ namespace net_ef_videogame
         public static void PrintElementSoftware()
         {
             using VideogameContext db = new VideogameContext();
-            Console.WriteLine("Print data...");
+            Console.WriteLine("Print software house data...");
 
             List<Software_house> software = db.Software_House.OrderBy(software => software.Id).ToList<Software_house>();
             
@@ -36,7 +36,7 @@ namespace net_ef_videogame
         public static void PrintElementVideogames()
         {
             using VideogameContext db = new VideogameContext();
-            Console.WriteLine("Print VideoGames...");
+            Console.WriteLine("Print VideoGames data...");
 
             List<VideoGame> videogame = db.VideoGame.OrderBy(videogame => videogame.Id).ToList<VideoGame>();
 
@@ -56,7 +56,7 @@ namespace net_ef_videogame
             foreach (VideoGame videoGame in videogame)
             {
                 Console.WriteLine($"\t {videoGame.Id} \t {videoGame.Name}");
-            }
+            }   
 
         }
 
@@ -98,6 +98,16 @@ namespace net_ef_videogame
             {
                 Console.WriteLine("Game Not Found!");
             }
+            db.SaveChanges();
+        }
+
+        public static void AddSoftwareHouse(string name, int taxId, string city)
+        {
+            using VideogameContext db = new VideogameContext();
+            Console.WriteLine("Add data...");
+
+            Software_house software = new Software_house { Name =  name, tax_id = taxId, City = city};
+            db.Add(software);
             db.SaveChanges();
         }
     }

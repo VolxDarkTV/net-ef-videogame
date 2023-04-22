@@ -20,9 +20,13 @@
                 Console.WriteLine("\t (2)    ricercare un videogioco per id");
                 Console.WriteLine("\t (3)    ricercare tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input");
                 Console.WriteLine("\t (4)    cancellare un videogioco");
-                Console.WriteLine("\t (5)    chiudere il programma");
+                Console.WriteLine("\t (5)    aggiungere una software house");
+                Console.WriteLine("\t (6)    chiudere il programma");
 
+               
                 int selector = Convert.ToInt32(Console.ReadLine());
+                
+
                 switch (selector)
                 {
                     case 1:
@@ -35,6 +39,8 @@
                             VideogameManager.PrintElementSoftware();
                             int idSoftwareHouse = Convert.ToInt32(Console.ReadLine());
                             VideogameManager.AddElement(nameGame, descriptionGame, idSoftwareHouse);
+                            Console.WriteLine("Video game list: ");
+                            VideogameManager.PrintElementVideogames();
                         }
                         catch (Exception ex)
                         {
@@ -82,16 +88,45 @@
                             Console.WriteLine(ex.Message);
                         }
                         break;
-
                     case 5:
                         try
                         {
-                            Console.WriteLine("Sicuro di voler Terminare il Programma? (s/n)");
-                            string str = Console.ReadLine().ToLower();
-                            if (str == "s")
+                            VideogameManager.PrintElementSoftware();
+                            Console.WriteLine("Name: ");
+                            string name = Console.ReadLine();
+                            Console.WriteLine("Tax Id: ");
+                            int taxId = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("City: ");
+                            string city = Console.ReadLine();
+                            VideogameManager.AddSoftwareHouse(name, taxId, city);
+                            VideogameManager.PrintElementSoftware();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        break;
+                    case 6:
+                        try
+                        {
+                            bool b = false;
+                            while (!b)
                             {
-                                Environment.Exit(0);
-                                exitProgram = true;
+                                Console.WriteLine("Sicuro di voler Terminare il Programma? (s/n)");
+                                string str = Console.ReadLine().ToLower();
+                                if (str == "s")
+                                {
+                                    Environment.Exit(0);
+                                    exitProgram = true;
+                                    b = true;
+                                }else if(str == "n")
+                                {
+                                    b = true;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Please insert (s) OR (n) to continue");
+                                }
                             }
                         }
                         catch (Exception ex)
