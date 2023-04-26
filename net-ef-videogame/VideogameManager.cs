@@ -110,5 +110,18 @@ namespace net_ef_videogame
             db.Add(software);
             db.SaveChanges();
         }
+
+        public static void SearchSoftwareHouseIdGame(int id)
+        {
+            using VideogameContext db = new VideogameContext();
+            Console.WriteLine("Print data...");
+
+            List<VideoGame> videogame = db.VideoGame.Where(videogame => videogame.Software_houseId == id).ToList<VideoGame>();
+
+            foreach (VideoGame videoGame in videogame)
+            {
+                Console.WriteLine(videoGame.Name);
+            }
+        }
     }
 }

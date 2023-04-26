@@ -21,7 +21,8 @@
                 Console.WriteLine("\t (3)    ricercare tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input");
                 Console.WriteLine("\t (4)    cancellare un videogioco");
                 Console.WriteLine("\t (5)    aggiungere una software house");
-                Console.WriteLine("\t (6)    chiudere il programma");
+                Console.WriteLine("\t (6)    ricerca videogame per SoftwareHouseId");
+                Console.WriteLine("\t (7)    chiudere il programma");
 
                
                 int selector = Convert.ToInt32(Console.ReadLine());
@@ -109,6 +110,19 @@
                     case 6:
                         try
                         {
+                            VideogameManager.PrintElementSoftware();
+                            int idSearch = Convert.ToInt32(Console.ReadLine());
+                            VideogameManager.SearchSoftwareHouseIdGame(idSearch);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                        
+                        break;
+                    case 7:
+                        try
+                        {
                             bool b = false;
                             while (!b)
                             {
@@ -119,7 +133,8 @@
                                     Environment.Exit(0);
                                     exitProgram = true;
                                     b = true;
-                                }else if(str == "n")
+                                }
+                                else if (str == "n")
                                 {
                                     b = true;
                                 }
@@ -133,6 +148,7 @@
                         {
                             Console.WriteLine(ex.ToString());
                         }
+
                         break;
                 }
                 
